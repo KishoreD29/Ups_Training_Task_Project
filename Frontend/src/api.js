@@ -25,6 +25,10 @@ async function request(path, { method = 'GET', body, token } = {}) {
     throw error
   }
 
+  if (response.status === 204) {
+    return null
+  }
+
   if (!result) {
     throw new Error('The server returned an unexpected response.')
   }
@@ -46,4 +50,24 @@ export function currentUser(token) {
 
 export function adminStatus(token) {
   return request('/admin/status', { token })
+}
+
+export function listBooks(token) {
+  return request('/admin/books', { token })
+}
+
+export function getBook(id, token) {
+  return request(`/admin/books/${id}`, { token })
+}
+
+export function createBook(book, token) {
+  return request('/admin/books', { method: 'POST', body: book, token })
+}
+
+export function updateBook(id, book, token) {
+  return request(`/admin/books/${id}`, { method: 'PUT', body: book, token })
+}
+
+export function deleteBook(id, token) {
+  return request(`/admin/books/${id}`, { method: 'DELETE', token })
 }
