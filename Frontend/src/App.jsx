@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import AdminBooks from './AdminBooks.jsx'
 import { adminStatus, currentUser, login, register } from './api.js'
 import './App.css'
 
@@ -250,6 +251,8 @@ function App() {
               </article>
             )}
           </div>
+
+          {isAdmin && <AdminBooks token={token} />}
 
           <p className="security-note">
             <span aria-hidden="true">⌑</span>
